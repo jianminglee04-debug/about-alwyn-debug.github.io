@@ -584,7 +584,7 @@ body { overflow-x: hidden; }
   pointer-events: none;
 }
 .photo-wrap {
-  width: clamp(260px, 35vw, 670px);
+  width: clamp(260px, 35vw, 470px);
   will-change: transform;       /* smooth parallax */
 }
 .photo {
