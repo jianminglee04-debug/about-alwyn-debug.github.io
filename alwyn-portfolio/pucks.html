@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alwyn — Pucks Coffee</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles/style.css" />
+  <link rel="stylesheet" href="styles/content.css" />
+</head>
+<body>
+
+  <!-- ============ NAV ============ -->
+  <header class="navbar">
+    <nav class="nav">
+      <a href="index.html" class="nav-link">What's Up</a>
+      <a href="aboutme.html" class="nav-link">About Me</a>
+      <a href="content.html" class="nav-link active">Content</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <main class="content-main">
+
+    <div class="showcase-bar">
+      <a class="hamburger" href="content.html" aria-label="Back to showcase">
+        <span></span><span></span><span></span>
+      </a>
+      <h1 class="showcase-title">SHOWCASE</h1>
+    </div>
+
+    <!-- ---------- PUCKS COFFEE detail ---------- -->
+    <section class="detail show">
+      <div class="detail-inner">
+
+        <!-- hero -->
+        <div class="heading-wrap reveal" style="--rd:0s">
+          <h2 class="detail-heading">WEB PROGRAMMING</h2>
+          <div class="heading-reflect" aria-hidden="true">WEB PROGRAMMING</div>
+        </div>
+
+        <p class="detail-sub reveal" style="--rd:0.12s">
+          Good coffee is expected.<br>A feeling is remembered.
+        </p>
+
+        <div class="logo-card round reveal" style="--rd:0.24s">
+          <img src="image/clogo.png" alt="Pucks Coffee"
+               onerror="this.parentElement.style.display='none'">
+        </div>
+
+        <div class="dm-block reveal" style="--rd:0.36s">
+          <h3 class="dm-dasher">PUCKS COFFEE</h3>
+          <div class="line"></div>
+          <p class="platforms tagline">People United by Coffee and Kooky Souls</p>
+          <div class="line"></div>
+        </div>
+
+        <!-- laptop hero shot -->
+        <img class="laptop sr" src="image/c1.png" alt="Pucks Coffee homepage on a laptop"
+             onerror="this.style.display='none'">
+
+        <!-- three feature blurbs -->
+        <div class="feat-list">
+          <div class="feat feat-gold sr">
+            <h4>Comprehensive Caf&eacute; Introduction</h4>
+            <p>Provides clear information about the caf&eacute; concept, atmosphere, and experience.</p>
+          </div>
+          <div class="feat feat-red sr">
+            <h4>Informative Menu and Event Content</h4>
+            <p>Shows food, drinks, and upcoming activities for customers to explore.</p>
+          </div>
+          <div class="feat feat-orange sr">
+            <h4>Essential Customer Information</h4>
+            <p>Includes location, contact details, and reservation to help users plan their visit.</p>
+          </div>
+        </div>
+
+        <!-- style tiles -->
+        <h3 class="section-label sr">Style Tiles</h3>
+        <img class="shot sr" src="image/c2.png" alt="Pucks Coffee style tiles and design system"
+             onerror="this.style.display='none'">
+
+        <!-- full page gallery (2 columns) -->
+        <div class="page-gallery">
+          <div class="page-col">
+            <div class="page-item sr">
+              <p class="page-label">Pucks Coffee Highlight</p>
+              <img class="page-shot" src="image/c3.png" alt="Pucks Coffee Highlight" onerror="this.closest('.page-item').style.display='none'">
+            </div>
+            <div class="page-item sr">
+              <p class="page-label">About Us</p>
+              <img class="page-shot" src="image/c4.png" alt="About Us" onerror="this.closest('.page-item').style.display='none'">
+            </div>
+          </div>
+
+          <div class="page-col">
+            <div class="page-item sr">
+              <p class="page-label">Homepage</p>
+              <img class="page-shot" src="image/c5.png" alt="Homepage" onerror="this.closest('.page-item').style.display='none'">
+            </div>
+            <div class="page-item sr">
+              <p class="page-label">Contact</p>
+              <img class="page-shot" src="image/c6.png" alt="Contact" onerror="this.closest('.page-item').style.display='none'">
+            </div>
+          </div>
+        </div>
+
+        <!-- Menu (centered, single) -->
+        <div class="page-item page-single sr">
+          <p class="page-label">Menu</p>
+          <img class="page-shot" src="image/c7.png" alt="Menu" onerror="this.closest('.page-item').style.display='none'">
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- reveal sections as they scroll into view -->
+  <script>
+    const srEls = document.querySelectorAll('.sr');
+    const io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+    srEls.forEach(function (el) { io.observe(el); });
+  </script>
+
+</body>
+</html>

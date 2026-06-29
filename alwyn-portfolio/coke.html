@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alwyn — Coca-Cola</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles/style.css" />
+  <link rel="stylesheet" href="styles/content.css" />
+</head>
+<body>
+
+  <!-- ============ NAV ============ -->
+  <header class="navbar">
+    <nav class="nav">
+      <a href="index.html" class="nav-link">What's Up</a>
+      <a href="aboutme.html" class="nav-link">About Me</a>
+      <a href="content.html" class="nav-link active">Content</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <main class="content-main">
+
+    <div class="showcase-bar">
+      <a class="hamburger" href="content.html" aria-label="Back to showcase">
+        <span></span><span></span><span></span>
+      </a>
+      <h1 class="showcase-title">SHOWCASE</h1>
+    </div>
+
+    <section class="detail show">
+      <div class="detail-inner">
+
+        <!-- hero -->
+        <div class="heading-wrap reveal" style="--rd:0s">
+          <h2 class="detail-heading">VIDEO PRODUCTION</h2>
+          <div class="heading-reflect" aria-hidden="true">VIDEO PRODUCTION</div>
+        </div>
+
+        <div class="video916 reveal" style="--rd:0.16s">
+          <video src="image/coke.mp4" controls playsinline preload="metadata"></video>
+        </div>
+
+        <div class="dm-block reveal" style="--rd:0.28s">
+          <h3 class="dm-dasher">COCA - COLA</h3>
+          <div class="line"></div>
+          <p class="platforms">ADVERTISEMENT</p>
+          <div class="line"></div>
+        </div>
+
+        <!-- horizontal can -->
+       <br><br>
+        <img class="shot sr" src="image/k1.png" alt="Coca-Cola can"
+             onerror="this.style.display='none'">
+
+        <!-- group photos (each image is 3 in a row) -->
+        <img class="group-shot sr" src="image/k2.png" alt="Coca-Cola shots" onerror="this.style.display='none'">
+        <img class="group-shot sr" src="image/k3.png" alt="Coca-Cola shots" onerror="this.style.display='none'">
+        <img class="group-shot sr" src="image/k4.png" alt="Coca-Cola shots" onerror="this.style.display='none'">
+        <img class="group-shot sr" src="image/k5.png" alt="Coca-Cola shots" onerror="this.style.display='none'">
+        <img class="group-shot sr" src="image/k6.png" alt="Coca-Cola shots" onerror="this.style.display='none'">
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- reveal sections as they scroll into view -->
+  <script>
+    const srEls = document.querySelectorAll('.sr');
+    const io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    srEls.forEach(function (el) { io.observe(el); });
+  </script>
+
+</body>
+</html>

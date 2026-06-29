@@ -1,0 +1,1685 @@
+/* ============================================================
+   ALWYN — Creative Chronicle
+   Homepage styles
+   ============================================================ */
+
+/* --- Design tokens (change colors in one place here) --- */
+:root {
+  --navy-deep:   #07081c;   /* darkest corner of the background */
+  --navy-mid:    #1a1c44;   /* mid tone                         */
+  --indigo-glow: #403e95;   /* bright top-left glow             */
+
+  --text-white:  #ffffff;
+  --text-muted:  rgba(214, 216, 235, 0.45); /* inactive nav links */
+
+  --line:        rgba(255, 255, 255, 0.45);  /* divider rules     */
+  --glow:        rgba(180, 190, 255, 0.55);  /* soft white glow   */
+}
+
+/* --- Reset & base --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  color: var(--text-white);
+
+  /* Radial gradient: bright indigo in the top-left corner,
+     fading out to deep navy — matches your Figma background. */
+  background: radial-gradient(
+    125% 125% at 0% 0%,
+    var(--indigo-glow) 0%,
+    var(--navy-mid) 38%,
+    var(--navy-deep) 78%
+  );
+  background-attachment: fixed;
+
+  /* Smooths the font edges */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================
+   Navigation bar
+   ============================================================ */
+.navbar {
+  position: fixed;            /* stays pinned to the top while scrolling */
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.6rem clamp(1.5rem, 5vw, 4.5rem);
+  z-index: 100;
+  background: transparent;    /* transparent — no fill, no blur */
+}
+
+.nav {
+  display: flex;
+  justify-content: center;            /* group links in the centre */
+  align-items: center;
+  gap: clamp(2rem, 6vw, 5rem);        /* even spacing — adjust to taste */
+}
+
+.nav-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: clamp(0.72rem, 1.3vw, 1.05rem);
+  letter-spacing: 0.12em;
+  padding-bottom: 0.55rem;        /* room for the underline */
+  border-bottom: 1.5px solid transparent;
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+
+/* Hover: inactive links brighten */
+.nav-link:hover {
+  color: var(--text-white);
+}
+
+/* The current page: white text + underline */
+.nav-link.active {
+  color: var(--text-white);
+  border-bottom-color: rgba(255, 255, 255, 0.6);
+}
+
+/* Keyboard focus outline for accessibility */
+.nav-link:focus-visible {
+  outline: 2px solid var(--glow);
+  outline-offset: 4px;
+}
+
+/* ============================================================
+   Hero (fills the whole screen)
+   ============================================================ */
+.hero {
+  min-height: 100vh;
+  min-height: 100dvh;   /* better on mobile browsers */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+/* width: fit-content makes this column exactly as wide as the
+   ALWYN wordmark, so the divider lines line up under it. */
+.hero-inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+/* Soft halo behind the logo. On the splash it blooms (see .intro
+   rules below); on the homepage it rests as a gentle glow. */
+.hero-inner::before {
+  content: "";
+  position: absolute;
+  inset: -25% -15%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(150, 165, 255, 0.35),
+    transparent 60%
+  );
+  z-index: -1;
+  opacity: 0.3;
+}
+
+.wordmark {
+  font-weight: 800;
+  font-size: clamp(3.5rem, 14vw, 11rem);
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+
+  /* Metallic text fill — a bright band sweeps through this (the
+     "shine"). The gradient is mostly white with a brighter glint
+     in the middle that the animation slides across the letters. */
+  background: linear-gradient(
+    100deg,
+    #ffffff 0%,
+    #ffffff 38%,
+    #e8ebff 47%,
+    #ffffff 50%,
+    #c4ccff 53%,
+    #ffffff 62%,
+    #ffffff 100%
+  );
+  background-size: 280% 100%;
+  background-position: 130% 0;       /* glint parked off to the right */
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* The chronicle block holds the two lines + the subtitle */
+.chronicle {
+  width: 100%;            /* same width as ALWYN above it */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* The thin lines above and below the subtitle.
+   The background is a gradient with a bright glint that the
+   shine animation slides along the line.
+   transform-origin: center makes them grow outward from the middle. */
+.rule {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    var(--line) 0%,
+    var(--line) 46%,
+    rgba(235, 240, 255, 1) 50%,   /* travelling glint */
+    var(--line) 54%,
+    var(--line) 100%
+  );
+  background-size: 250% 100%;
+  background-position: 130% 0;     /* glint parked off to the right */
+  box-shadow: 0 0 8px rgba(180, 190, 255, 0.25);
+  margin: 1.1rem 0;
+  transform-origin: center;
+}
+
+/* The divider lines. Their entry + glint animations live in the
+   .intro section below, so on the homepage they rest as static lines. */
+
+.subtitle {
+  font-weight: 400;
+  font-size: clamp(1rem, 3.2vw, 2.1rem);
+  letter-spacing: 0.42em;
+  /* letter-spacing adds space after the last letter too,
+     this nudges the text back to visually centered */
+  text-indent: 0.42em;
+  text-shadow: 0 0 18px var(--glow), 0 0 4px rgba(255, 255, 255, 0.35);
+
+  /* Pin the subtitle's box to the ALWYN width: width:0 means it never
+     contributes to .hero-inner's shrink-to-fit sizing, and min-width:100%
+     stretches it back to the wordmark width. So .hero-inner always hugs
+     ALWYN — never the subtitle — which keeps the two divider lines equal
+     to each other and matched to the wordmark at every screen size, with
+     no overflow to offset the splash vs. the homepage. */
+  width: 0;
+  min-width: 100%;
+  text-align: center;
+  white-space: normal;   /* wrap (instead of overflow) if it ever exceeds ALWYN */
+}
+
+/* ============================================================
+   Intro splash (plays once on load, then fades to reveal the site)
+   ============================================================ */
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;                 /* sits above everything */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Same navy background so it fully covers the homepage */
+  background: radial-gradient(
+    125% 125% at 0% 0%,
+    var(--indigo-glow) 0%,
+    var(--navy-mid) 38%,
+    var(--navy-deep) 78%
+  );
+
+  transition: opacity 0.9s ease;  /* the fade-out */
+}
+
+/* The script adds this class to fade the splash away */
+.intro.hidden {
+  opacity: 0;
+  pointer-events: none;           /* let clicks reach the site beneath */
+}
+
+/* Small "click to skip" hint at the bottom */
+.intro-skip {
+  position: absolute;
+  bottom: 2.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  animation: hintFade 1s ease-out 2.6s both;  /* appears late */
+}
+
+/* --- Animations only run inside the splash --- */
+/* Sequence: (1) ALWYN fades in → (2) line draws & splits →
+   (3) the word appears → then a shine sweeps across as the finish. */
+.intro .hero-inner {
+  animation: zoom 4.5s ease-out both;                 /* slow push-in throughout */
+}
+.intro .hero-inner::before {
+  opacity: 0;
+  animation: bloom 2.4s ease-out 1.7s both;           /* glow blooms with the word */
+}
+
+/* BEAT 1 — title fades in (0 → 0.8s). The shine is saved for the end. */
+.intro .wordmark {
+  animation:
+    rise 0.8s ease-out both,
+    shine 1.4s ease-in-out 2.8s both;
+}
+
+/* BEAT 2 — line draws & splits, only after the title is in (starts 0.9s) */
+/* --cv = how far each line is pulled toward the centre so they emerge JOINED.
+   It must equal half the gap between the two lines. That gap grows/shrinks
+   with the subtitle, so we scale it the same way (1.1rem = each line's margin,
+   plus ~half the subtitle's height). This keeps the join symmetric on every
+   screen size instead of overshooting and crossing on mobile. */
+.intro .rule {
+  --cv: calc(1.1rem + 0.65 * clamp(1rem, 3.2vw, 2.1rem));
+}
+.intro .rule-top {
+  animation:
+    lineTop 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.9s both,
+    lineShine 1.4s ease-in-out 2.8s both;
+}
+.intro .rule-bottom {
+  animation:
+    lineBottom 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.9s both,
+    lineShine 1.4s ease-in-out 2.8s both;
+}
+
+/* BEAT 3 — the word appears last, once the lines have opened (starts 2.0s) */
+.intro .subtitle {
+  animation: wordReveal 0.9s ease-out 2.0s both;
+}
+
+/* ============================================================
+   Animation
+   ============================================================ */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Top line: draws across the centre (scaleX 0 → 1), flares bright,
+   then lifts up and settles to a soft glow */
+/* Top line: emerges joined with the bottom line in the centre (scaleX grows
+   while both are pulled toward the middle by --cv), then opens upward to its
+   final spot above the subtitle. */
+@keyframes lineTop {
+  0%   { transform: translateY(var(--cv)) scaleX(0); opacity: 0; box-shadow: 0 0 0 rgba(190, 200, 255, 0); }
+  35%  { transform: translateY(var(--cv)) scaleX(1); opacity: 1; box-shadow: 0 0 22px rgba(190, 200, 255, 0.9); }
+  100% { transform: translateY(0)          scaleX(1); opacity: 1; box-shadow: 0 0 8px rgba(180, 190, 255, 0.25); }
+}
+
+/* Bottom line: same, but pulled up by --cv, then opens downward */
+@keyframes lineBottom {
+  0%   { transform: translateY(calc(-1 * var(--cv))) scaleX(0); opacity: 0; box-shadow: 0 0 0 rgba(190, 200, 255, 0); }
+  35%  { transform: translateY(calc(-1 * var(--cv))) scaleX(1); opacity: 1; box-shadow: 0 0 22px rgba(190, 200, 255, 0.9); }
+  100% { transform: translateY(0)                    scaleX(1); opacity: 1; box-shadow: 0 0 8px rgba(180, 190, 255, 0.25); }
+}
+
+/* The word brightens in like "STUDIOS" — focus sharpens and the glow
+   flares, then settles. It now runs last, so it reveals from 0%. */
+@keyframes wordReveal {
+  0%   { opacity: 0; transform: scale(0.96); filter: blur(6px);
+         text-shadow: 0 0 0 rgba(255, 255, 255, 0); }
+  55%  { text-shadow: 0 0 28px rgba(200, 210, 255, 0.95),
+                      0 0 8px rgba(255, 255, 255, 0.6); }
+  100% { opacity: 1; transform: scale(1); filter: blur(0);
+         text-shadow: 0 0 18px var(--glow), 0 0 4px rgba(255, 255, 255, 0.35); }
+}
+
+/* The light sweep across ALWYN — slides the bright glint left across */
+@keyframes shine {
+  from { background-position: 130% 0; }
+  to   { background-position: -30% 0; }
+}
+
+/* The glint that travels along each divider line */
+@keyframes lineShine {
+  from { background-position: 130% 0; }
+  to   { background-position: -30% 0; }
+}
+
+/* Glow blooms up at the climax, then eases back to an ambient halo */
+@keyframes bloom {
+  0%   { opacity: 0;    transform: scale(0.8); }
+  40%  { opacity: 0.9;  transform: scale(1.05); }
+  100% { opacity: 0.35; transform: scale(1); }
+}
+
+/* Slow push-in zoom on the whole logo */
+@keyframes zoom {
+  from { transform: scale(0.92); }
+  to   { transform: scale(1); }
+}
+
+/* The "click to skip" hint fades in late */
+@keyframes hintFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Respect users who prefer reduced motion — skip the splash,
+   show the homepage straight away (it's static anyway) */
+@media (prefers-reduced-motion: reduce) {
+  .intro {
+    display: none;
+  }
+}
+
+/* ============================================================
+   Small screens
+   ============================================================ */
+/* Medium screens: ALWYN shrinks faster than the subtitle, so tighten the
+   subtitle's letter-spacing here. This keeps its single-line width under the
+   wordmark, so .hero-inner keeps hugging ALWYN and the two divider lines
+   stay matched to the wordmark's edges. */
+@media (max-width: 1200px) {
+  .subtitle {
+    letter-spacing: 0.26em;
+    text-indent: 0.26em;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-link {
+    letter-spacing: 0.06em;
+  }
+  .subtitle {
+    letter-spacing: 0.12em;
+    text-indent: 0.12em;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ============================================================
+   ALWYN — About Me page
+   Loads AFTER style.css, which already provides the colour tokens,
+   the navy body background, and the navigation bar styles.
+   ============================================================ */
+
+/* stop any off-screen icon drift from adding a sideways scrollbar */
+body { overflow-x: hidden; }
+
+.about {
+  position: relative;
+  min-height: 100vh;
+  padding: 7rem clamp(2rem, 6vw, 6rem) 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: clamp(2rem, 8vw, 7rem);
+}
+
+/* ============================================================
+   Left column — intro, education, language
+   ============================================================ */
+.about-left {
+  justify-self: start;
+  max-width: 500px;
+  z-index: 3;
+}
+
+.greeting {
+  font-weight: 300;
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 0.3rem;
+}
+
+.name {
+  font-weight: 800;
+  font-size: clamp(1.7rem, 3.8vw, 2.5rem);
+  line-height: 1.05;
+  white-space: nowrap;        /* keep "Alwyn Lee Jian Ming" on one row */
+}
+
+.name-rule {
+  height: 2px;
+  width: 100%;
+  background: var(--line);
+  box-shadow: 0 0 8px rgba(180, 190, 255, 0.25);
+  margin: 1.1rem 0 1.4rem;
+  transform-origin: left;
+  animation: growLine 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.5s both;
+}
+
+.bio {
+  font-weight: 300;
+  font-size: clamp(0.92rem, 1.3vw, 1.05rem);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 40ch;
+}
+
+/* Section headings (Education, Language, Work Experience) */
+.section-title {
+  font-weight: 700;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  display: inline-block;
+  padding-bottom: 0.35rem;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.6);
+  margin: 2.4rem 0 1.1rem;
+}
+
+/* Education */
+.edu-item { margin-bottom: 1.1rem; }
+.edu-school {
+  font-weight: 400;
+  font-size: clamp(0.85rem, 1.2vw, 0.98rem);
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0.4rem;
+}
+.edu-detail {
+  font-weight: 300;
+  font-size: clamp(0.82rem, 1.1vw, 0.92rem);
+  color: rgba(255, 255, 255, 0.7);
+  padding-left: 1rem;
+  position: relative;
+  line-height: 1.6;
+}
+.edu-detail::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Language */
+.lang-row {
+  display: flex;
+  align-items: baseline;
+  font-weight: 300;
+  font-size: clamp(0.85rem, 1.2vw, 0.98rem);
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 0.55rem;
+}
+.lang-name  { width: 11rem; }
+.lang-dash  { width: 2rem; color: rgba(255, 255, 255, 0.4); }
+
+/* ============================================================
+   Right column — work experience (cascades to the right)
+   ============================================================ */
+.about-right {
+  justify-self: end;
+  max-width: 380px;
+  z-index: 3;
+  /* sits well below the floating icon band so they never overlap */
+  padding-top: clamp(8rem, 30vh, 20rem);
+  /* nudge the whole column a little left, off the right edge */
+  margin-right: clamp(0rem, 2vw, 2rem);
+}
+.about-right .section-title { margin-top: 0; }
+
+.work-list {
+  display: flex;
+  flex-direction: column;
+}
+.work-item { margin-bottom: 1.6rem; }
+/* each entry steps further right than the one above (a stronger cascade) */
+.work-item:nth-child(2) { margin-left: clamp(0rem, 3vw, 2.5rem); }
+.work-item:nth-child(3) { margin-left: clamp(0rem, 6vw, 5rem); }
+.work-item:nth-child(4) { margin-left: clamp(0rem, 9vw, 7.5rem); }
+
+.work-title {
+  font-weight: 700;
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+}
+.work-company {
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(0.82rem, 1.1vw, 0.95rem);
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 0.15rem;
+}
+.work-date {
+  font-size: clamp(0.68rem, 0.9vw, 0.78rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  margin-top: 0.25rem;
+}
+
+/* ============================================================
+   Centre photo (jm.png) — anchored to the bottom, behind the text
+   ============================================================ */
+.photo-pos {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  z-index: 2;
+  pointer-events: none;
+}
+.photo-wrap {
+  width: clamp(260px, 30vw, 470px);
+  will-change: transform;       /* smooth parallax */
+}
+.photo {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 28px 50px rgba(0, 0, 0, 0.5));
+  /* no entrance animation — the photo stays still */
+}
+
+/* ============================================================
+   Floating software icons (upper-right)
+   ============================================================ */
+.tools {
+  position: absolute;
+  top: 3.5rem;
+  left: 48%;                 /* cluster runs from the middle to the right edge */
+  right: 1.5%;
+  height: clamp(190px, 30vh, 340px);   /* a top band, clear of the work text */
+  z-index: 1;
+  pointer-events: none;
+  will-change: transform;
+}
+.tool {
+  position: absolute;
+  width: clamp(56px, 5.2vw, 84px);   /* every icon the same size */
+  opacity: 0;
+  /* entrance: pop into place */
+  animation: toolIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) var(--in, 0s) forwards;
+}
+.tool img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.5));
+  /* continuous gentle bob */
+  animation: float var(--dur, 5s) ease-in-out var(--fl, 0s) infinite;
+}
+
+/* ============================================================
+   Entrance reveals (used via classes in the HTML)
+   ============================================================ */
+.reveal-left,
+.reveal-right,
+.reveal-up { opacity: 0; }
+
+.reveal-left  { animation: revealLeft  0.8s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s) both; }
+.reveal-right { animation: revealRight 0.8s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s) both; }
+.reveal-up    { animation: revealUp    0.8s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s) both; }
+
+@keyframes revealLeft  { from { opacity: 0; transform: translateX(-26px); } to { opacity: 1; transform: none; } }
+@keyframes revealRight { from { opacity: 0; transform: translateX( 26px); } to { opacity: 1; transform: none; } }
+@keyframes revealUp    { from { opacity: 0; transform: translateY( 30px); } to { opacity: 1; transform: none; } }
+
+@keyframes growLine { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+@keyframes toolIn {
+  from { opacity: 0; transform: translateY(14px) scale(0.85); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+/* ============================================================
+   Reduced motion — show everything, no movement
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-left, .reveal-right, .reveal-up,
+  .tool, .name-rule {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .photo, .tool img { animation: none; }
+}
+
+/* ============================================================
+   Mobile / tablet — stack everything into one column
+   ============================================================ */
+@media (max-width: 900px) {
+  .about {
+    grid-template-columns: 1fr;
+    row-gap: 1.5rem;
+    padding-top: 6rem;
+  }
+
+  /* mobile stacking order: photo first, then icons, then all the text */
+  .photo-pos   { order: 1; }
+  .tools       { order: 2; }
+  .about-left  { order: 3; }
+  .about-right { order: 4; }
+  .about-left,
+  .about-right {
+    max-width: 100%;
+    justify-self: stretch;
+    padding-top: 0;
+  }
+  /* on phones the name can wrap again — one line only matters on desktop */
+  .name { white-space: normal; }
+  /* drop the cascade indent on mobile */
+  .work-item:nth-child(2),
+  .work-item:nth-child(3),
+  .work-item:nth-child(4) { margin-left: 0; }
+
+  /* photo + icons become normal stacked blocks */
+  .photo-pos { position: static; margin-top: 1.5rem; }
+  .photo-wrap { width: clamp(220px, 60vw, 320px); }
+
+  .tools {
+    position: static;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    justify-content: center;
+    margin: 1.5rem 0 2rem;
+  }
+  .tool {
+    position: static !important;
+    width: 60px !important;
+    inset: auto !important;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ============================================================
+   ALWYN — Showcase + project detail pages
+   Loads AFTER style.css. Shared by content.html (the showcase
+   list) and every project page (dasher.html, eternify.html ...).
+   ============================================================ */
+
+.content-main {
+  padding-top: 5.5rem;     /* clear the fixed nav */
+  padding-bottom: 4rem;
+}
+
+/* ============================================================
+   Showcase header (hamburger + SHOWCASE) — sticky, transparent
+   ============================================================ */
+.showcase-bar {
+  position: sticky;
+  top: 5.5rem;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  padding: 0.3rem clamp(1.5rem, 5vw, 4.5rem) 0.6rem;
+  background: transparent;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.55));
+}
+.hamburger {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 30px;
+  padding: 4px 2px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+.hamburger span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 2px;
+  transition: background 0.2s ease;
+}
+.hamburger:hover span { background: #fff; }
+.showcase-title {
+  font-weight: 800;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.45);
+  padding: 0 1.5rem 0.3rem 0;
+}
+
+/* ============================================================
+   Selection — the 8 banner bars (centered). Bars are links.
+   ============================================================ */
+.bars {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.8rem, 1.6vw, 1.4rem);
+  width: min(90%, 1150px);
+  margin: 0 auto;
+  padding: 1.2rem 0 2rem;
+}
+.bar {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  opacity: 0;
+  animation: rise 0.7s ease-out var(--d, 0s) both;
+}
+.bar-inner {
+  display: block;
+  border-radius: 10px;
+  overflow: hidden;
+  transform-origin: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.bar-inner img { display: block; width: 100%; height: auto; }
+.bar:hover .bar-inner,
+.bar:focus-visible .bar-inner {
+  transform: scale(1.045);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55);
+}
+
+/* ============================================================
+   Detail view — used directly as a full page now (.detail.show)
+   ============================================================ */
+.detail { display: none; }
+.detail.show { display: block; }
+
+.detail-inner {
+  max-width: min(1240px, 95vw);
+  margin: 0 auto;
+  padding: 1rem clamp(1rem, 4vw, 2rem) 2rem;
+  text-align: center;
+}
+.detail .reveal {
+  opacity: 0;
+  animation: rise 0.8s ease-out var(--rd, 0s) both;
+}
+
+/* ---- big heading + tight mirror reflection ---- */
+.heading-wrap { margin-bottom: 2.4rem; }
+.detail-heading {
+  font-weight: 800;
+  font-size: clamp(1.8rem, 5vw, 3.3rem);
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+.heading-reflect {
+  font-weight: 800;
+  font-size: clamp(1.8rem, 5vw, 3.3rem);
+  letter-spacing: 0.02em;
+  line-height: 1;
+  margin-top: 0.06em;
+  transform: scaleY(-1);
+  filter: blur(2px);
+  opacity: 0.16;
+  pointer-events: none;
+  user-select: none;
+  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.5), transparent 70%);
+          mask-image: linear-gradient(to top, rgba(0,0,0,0.5), transparent 70%);
+}
+
+.detail-sub {
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-size: clamp(1.1rem, 2.4vw, 1.8rem);
+  line-height: 1.35;
+  margin-bottom: 2.6rem;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* white logo card (Dasher card / Eternify card) */
+.dasher-card,
+.logo-card {
+  width: clamp(180px, 30vw, 300px);
+  margin: 0 auto 1.8rem;
+  background: #fff;
+  border-radius: 24px;
+  padding: 2rem;
+  box-shadow: 0 0 40px rgba(150, 165, 255, 0.4);
+}
+.dasher-card img,
+.logo-card img { width: 100%; height: auto; display: block; }
+/* Eternify card a touch smaller than the Dasher card */
+.logo-card { width: clamp(150px, 24vw, 240px); }
+/* circular logo card variant (Pucks) */
+.logo-card.round {
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  padding: 0%;
+}
+.logo-card.round img { width: 100%; height: auto; }
+
+/* ---- title + line + small caption block (DM DASHER / ETERNIFY) ---- */
+.dm-block {
+  width: fit-content;
+  max-width: 100%;
+  margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.dm-block .line {
+  height: 1px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.55);
+}
+.dm-dasher {
+  font-weight: 800;
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  letter-spacing: 0.18em;
+}
+.platforms {
+  font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.85);
+  white-space: nowrap;
+}
+.platforms a { color: inherit; text-decoration: none; }
+/* long phrase taglines (e.g. Pucks) may wrap on small screens */
+.platforms.tagline { white-space: normal; letter-spacing: 0.1em; }
+
+/* ============================================================
+   Brand sections (DREAME / MOVA / UWANT / VLOG / ME in Dasher)
+   ============================================================ */
+.brand-logo {
+  display: block;
+  width: clamp(220px, 55vw, 500px);
+  height: auto;
+  margin: clamp(13rem, 30vw, 10rem) auto 0;
+}
+.brand-text {
+  font-weight: 800;
+  font-size: clamp(9rem, 13vw, 10rem);
+  letter-spacing: 0.12em;
+  margin: clamp(3rem, 8vw, 6rem) 0 0;
+}
+.me-title {
+  font-weight: 800;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  letter-spacing: 0.04em;
+  margin: clamp(3rem, 8vw, 6rem) 0 0;
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: clamp(4.7rem, 14vw, 5.3rem);
+  row-gap: clamp(1.8rem, 10vw, 5.6rem);
+  margin: clamp(7rem, 10vw, 2.6rem) 0 0;
+}
+.video-grid.single { display: flex; justify-content: center; }
+.video-grid.single .vid { width: clamp(220px, 32%, 380px); }
+
+.vid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+.vid video {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+  background: #000;
+  border-radius: 3px;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.45);
+}
+.vid .photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+  background: #000;
+  border-radius: 3px;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.45);
+}
+.capwrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+.capwrap .line { height: 1px; width: 100%; background: rgba(255, 255, 255, 0.45); }
+.cap {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: clamp(0.7rem, 1.2vw, 0.92rem);
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+/* ============================================================
+   ETERNIFY page — device shots, feature blurbs, key features,
+   page gallery, closing CTA
+   ============================================================ */
+
+/* laptop / large landscape screenshots */
+.laptop {
+  display: block;
+  width: 100%;
+  max-width: min(1000px, 100%);
+  height: auto;
+  margin: clamp(2rem, 6vw, 4rem) auto 0;
+  border-radius: 8px;
+}
+.shot {
+  display: block;
+  width: 70%;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 8px;
+}
+.shot-cap {
+  max-width: 640px;
+  margin: 2rem auto 0;
+  font-size: clamp(0.95rem, 1.8vw, 1.25rem);
+  font-weight: 600;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* 3 feature blurbs (left aligned, coloured headings) */
+.feat-list {
+  max-width: 760px;
+  margin: clamp(3rem, 7vw, 5rem) auto 0;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.feat h4 {
+  font-weight: 800;
+  font-size: clamp(1.1rem, 2.4vw, 1.6rem);
+  letter-spacing: 0.02em;
+  margin-bottom: 0.5rem;
+}
+.feat p {
+  font-size: clamp(0.95rem, 1.7vw, 1.15rem);
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.88);
+}
+.feat-gold h4 { color: #d9b46c; }
+.feat-blue h4 { color: #7c8be0; }
+/* extra accents (Planner Hub palette) */
+.feat-amber h4 { color: #e3a82c; }
+.feat-cream h4 { color: #e7d6a6; }
+.feat-sky   h4 { color: #5fa0e6; }
+.feat-royal h4 { color: #2f63cf; }
+.feat-red   h4 { color: #e9554a; }
+.feat-orange h4 { color: #e57e2e; }
+
+/* section label (Style Tiles / Key Feature) */
+.section-label {
+  font-weight: 700;
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  letter-spacing: 0.02em;
+  margin: clamp(5rem, 12vw, 9rem) 0 clamp(1.5rem, 4vw, 2.5rem);
+  color: #fff;
+}
+
+/* key-feature showcase blocks — gap between each feature */
+.kf { margin-top: clamp(5rem, 16vw, 9.5rem); }
+.kf:first-of-type { margin-top: 0; }
+.kf-cap {
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: clamp(1rem, 2.2vw, 1.45rem);
+  margin: 1.4rem 0 0.5rem;
+}
+.kf-sub {
+  max-width: 640px;
+  margin: 0 auto;
+  font-size: clamp(0.9rem, 1.7vw, 1.1rem);
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* 2-column gallery of full-page screenshots */
+.page-gallery {
+  display: flex;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  margin: clamp(4rem, 9vw, 7rem) 0 0;
+  text-align: center;
+}
+.page-col {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.5rem, 6vw, 4.5rem);
+}
+.page-label {
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  margin-bottom: 1rem;
+  color: rgba(255, 255, 255, 0.92);
+}
+.page-shot {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.4);
+}
+/* a single screenshot centered below the 2-column gallery (e.g. Menu) */
+.page-single {
+  max-width: 48%;
+  margin: clamp(2.5rem, 6vw, 4.5rem) auto 0;
+  text-align: center;
+}
+
+/* closing call-to-action */
+.cta {
+  margin: clamp(5rem, 12vw, 9rem) 0 2rem;
+  font-size: clamp(1.1rem, 2.6vw, 1.9rem);
+  font-weight: 600;
+  line-height: 1.5;
+}
+.cta a {
+  color: #8aa0ff;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(138, 160, 255, 0.5);
+}
+.cta a:hover { color: #b9c6ff; }
+
+/* ============================================================
+   Scroll-reveal — animate elements in as they enter view
+   ============================================================ */
+.sr {
+  opacity: 0;
+  transform: translateY(38px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.sr.in-view {
+  opacity: 1;
+  transform: none;
+}
+.video-grid .vid:nth-child(3n + 2) { transition-delay: 0.10s; }
+.video-grid .vid:nth-child(3n + 3) { transition-delay: 0.20s; }
+
+/* ============================================================
+   Reduced motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .bar,
+  .detail .reveal { animation: none; opacity: 1; }
+  .sr { opacity: 1; transform: none; transition: none; }
+}
+
+/* ============================================================
+   Mobile
+   ============================================================ */
+@media (max-width: 620px) {
+  .video-grid {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: clamp(1rem, 5vw, 2rem);
+  }
+  .video-grid.single .vid { width: clamp(150px, 46%, 240px); }
+  .brand-text { font-size: clamp(3rem, 16vw, 6rem); }
+  .me-title  { font-size: clamp(1.8rem, 9vw, 3rem); }
+
+  .feat-list { gap: 1.4rem; }
+  .page-gallery { flex-direction: column; gap: clamp(2.5rem, 8vw, 3.5rem); }
+  .page-single { max-width: 100%; }
+}
+
+/* ============================================================
+   VIDEO PRODUCTION page (几分之几 / You Complete Me)
+   ============================================================ */
+
+/* responsive 16:9 video (YouTube embed or local file) */
+.video16 {
+  position: relative;
+  width: 100%;
+  max-width: min(900px, 100%);
+  margin: clamp(2rem, 5vw, 3rem) auto 0;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+}
+.video16 iframe,
+.video16 video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  object-fit: cover;
+}
+
+/* diagonal caution-stripe divider (full width) */
+.stripes {
+  width: 100%;
+  height: clamp(44px, 7vw, 84px);
+  margin: clamp(2.5rem, 6vw, 4rem) 0 0;
+  background: repeating-linear-gradient(-45deg, #000 0 30px, #f4f4f4 30px 60px);
+}
+
+/* full-bleed white text bands (Chinese story / English summary) */
+.cn-band {
+  width: 100%;
+  background: #fff;
+  color: #15151c;
+  padding: clamp(3rem, 8vw, 6rem) clamp(1.25rem, 5vw, 3rem);
+}
+.cn-band + .cn-band { margin-top: clamp(2rem, 6vw, 4rem); }
+.band-inner { max-width: 980px; margin: 0 auto; text-align: center; }
+.band-inner p {
+  font-size: clamp(0.95rem, 1.9vw, 1.2rem);
+  line-height: 1.9;
+  margin: 0 0 1.5rem;
+}
+.band-inner p:last-child { margin-bottom: 0; }
+.band-inner.en p { line-height: 1.7; }
+.band-head {
+  font-weight: 800;
+  font-size: clamp(1.3rem, 3vw, 2rem);
+  line-height: 1.3;
+  margin: 0 0 1.6rem;
+}
+
+/* production crew */
+.crew-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  margin: clamp(3rem, 8vw, 5rem) 0 0;
+}
+.crew-list { max-width: 1000px; margin: clamp(2.5rem, 6vw, 4rem) auto 0; }
+.crew-row {
+  font-size: clamp(0.85rem, 1.6vw, 1.05rem);
+  letter-spacing: 0.03em;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.9);
+  margin: clamp(1.1rem, 2.6vw, 1.9rem) 0;
+}
+
+/* mood-board photo gallery (masonry columns) */
+.mood {
+  column-count: 3;
+  column-gap: clamp(0.5rem, 1.5vw, 1rem);
+  margin: clamp(3rem, 8vw, 5rem) 0 0;
+}
+.mood img {
+  width: 100%;
+  display: block;
+  border-radius: 4px;
+  margin: 0 0 clamp(0.5rem, 1.5vw, 1rem);
+  break-inside: avoid;
+}
+/* fade-only reveal inside columns (translate is unsafe in multicol) */
+.mood .sr { transform: none; }
+
+/* single full-width moodboard image */
+.moodboard {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: clamp(3rem, 8vw, 5rem) auto 0;
+  border-radius: 6px;
+}
+
+@media (max-width: 620px) {
+  .mood { column-count: 2; }
+}
+
+/* ============================================================
+   COCA-COLA page — portrait video + stacked group images
+   ============================================================ */
+
+/* portrait 9:16 video (centered) */
+.video916 {
+  position: relative;
+  width: 30%;
+  max-width: clamp(270px, 62vw, 420px);
+  margin: clamp(2rem, 5vw, 3rem) auto 0;
+  aspect-ratio: 9 / 16;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+}
+.video916 video,
+.video916 iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  object-fit: cover;
+}
+
+/* a "3-in-a-row" group photo (one wide image, full container width) */
+.group-shot {
+  display: block;
+  width: 85%;
+  height: auto;
+  margin: clamp(2.5rem, 7vw, 5rem) auto 0;
+  border-radius: 6px;
+}
+
+/* ============================================================
+   2D ANIMATION page (Woodland Rascal)
+   ============================================================ */
+
+/* key poses — sits in the same 75% footprint as the turnaround,
+   and auto-fits however many images are present (1 or several) */
+.pose-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+  gap: clamp(0.6rem, 2vw, 1.4rem);
+  align-items: center;
+  width: 75%;
+  margin: clamp(2.5rem, 6vw, 4rem) auto 0;
+}
+.pose-grid img { width: 100%; height: auto; display: block; }
+
+/* a big heading used mid-page (extra top gap) */
+.heading-wrap.mid { margin-top: clamp(5rem, 12vw, 9rem); }
+
+@media (max-width: 620px) {
+  .pose-grid { width: 100%; gap: clamp(0.8rem, 4vw, 1.4rem); }
+}
+
+/* ------------------------------------------------------------
+   Character Description — w7 art on the left, text on the right
+   ------------------------------------------------------------ */
+.char-desc {
+  display: flex;
+  align-items: center;
+  gap: clamp(2rem, 6vw, 5rem);
+  margin-top: clamp(4rem, 11vw, 8rem);
+  text-align: left;
+}
+.char-desc-img { flex: 0 0 44%; max-width: 44%; }
+.char-desc-img img { width: 100%; height: auto; display: block; }
+
+.char-desc-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.6rem, 4vw, 2.6rem);
+}
+.cd-item h4 {
+  font-weight: 800;
+  font-size: clamp(1.2rem, 2.6vw, 1.9rem);
+  letter-spacing: 0.01em;
+  margin-bottom: 0.45rem;
+}
+.cd-item p {
+  font-weight: 700;
+  font-size: clamp(1rem, 2vw, 1.45rem);
+  line-height: 1.4;
+  color: #fff;
+}
+
+@media (max-width: 760px) {
+  .char-desc { flex-direction: column; align-items: center; text-align: center; gap: clamp(1.8rem, 6vw, 3rem); }
+  .char-desc-img { flex: none; max-width: 70%; }
+  .char-desc-text { align-items: center; }
+}
+
+/* ============================================================
+   LABEL — magazine e-publication
+   (flipbook embed, SDG blocks, full-bleed spread, cover bands)
+   ============================================================ */
+
+/* wide white logo card (Label wordmark) */
+/* full-width white band holding the Label logo (spans the page) */
+.pub-card {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  background: #fff;
+  padding: clamp(2.5rem, 7vw, 5rem) clamp(1.5rem, 5vw, 3rem);
+}
+.pub-card img {
+  width: 100%;
+  max-width: 640px;     /* logo size within the white band */
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* AnyFlip flipbook embed (sits where the QR was) */
+.flipbook {
+  position: relative;
+  width: 100%;
+  max-width: min(720px, 100%);
+  margin: clamp(2.5rem, 6vw, 4rem) auto 0;
+  aspect-ratio: 4 / 3;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+}
+.flipbook iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+/* centered body paragraph */
+.body-copy {
+  max-width: 640px;
+  margin: clamp(2rem, 5vw, 3rem) auto 0;
+  font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.88);
+}
+.body-copy + .body-copy { margin-top: clamp(1.4rem, 3vw, 2rem); }
+
+/* SDG subtitle + icon */
+/* SDG subtitle — same type treatment as "MASTHEAD DESIGN" (.platforms) */
+.sdg-sub {
+  font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.85);
+}
+.sdg-icon {
+  display: block;
+  width: clamp(220px, 222vw,275px);
+  height: auto;
+  margin: clamp(2rem, 5vw, 3rem) auto 0;
+  border-radius: 4px;
+}
+
+/* Label Magazine heading + subtitle */
+.mag-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  letter-spacing: 0.01em;
+  margin: clamp(5rem, 12vw, 8rem) 0 0;
+}
+.mag-sub {
+  max-width: 620px;
+  margin: 1.1rem auto 0;
+  font-size: clamp(0.9rem, 1.7vw, 1.1rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* full-bleed image (the magazine spreads, l3) */
+.bleed {
+  display: block;
+  width: 100vw;
+  height: auto;
+  margin-left: calc(50% - 50vw);
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+}
+
+/* single magazine cover (l4) */
+.cover-shot {
+  display: block;
+  width: clamp(300px, 55vw, 520px);
+  height: auto;
+  margin: clamp(2.5rem, 6vw, 4rem) auto 0;
+  border-radius: 6px;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.55);
+}
+
+/* Economix logo inside the white band */
+.cn-band.full { width: 100vw; margin-left: calc(50% - 50vw); }
+.econ-logo {
+  display: block;
+  width: clamp(240px, 55vw, 460px);
+  height: auto;
+  margin: clamp(1.5rem, 4vw, 2.4rem) auto;
+}
+
+/* layered cover band: full-bleed background photo + cover + caption */
+.cover-band {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  padding: clamp(2.5rem, 7vw, 6rem) clamp(1.5rem, 6vw, 5rem);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+}
+.cover-band.reverse { flex-direction: row-reverse; }
+.cover-band .cover { flex: 0 0 auto; width: clamp(180px, 26vw, 320px); }
+.cover-band .cover img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.6);
+}
+.cover-band .cover-cap {
+  flex: 0 1 380px;
+  background: rgba(247, 247, 247, 0.92);
+  color: #15151c;
+  padding: clamp(1.2rem, 3vw, 2rem);
+  border-radius: 4px;
+  text-align: left;
+  font-size: clamp(0.85rem, 1.6vw, 1.05rem);
+  line-height: 1.7;
+}
+
+@media (max-width: 720px) {
+  .cover-band, .cover-band.reverse { flex-direction: column; }
+  .cover-band .cover { width: clamp(190px, 60vw, 300px); }
+  .cover-band .cover-cap { flex: none; width: 100%; max-width: 460px; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ============================================================
+   ALWYN — Contact page
+   Loads AFTER style.css (uses its bg, nav, and `rise` keyframe).
+   ============================================================ */
+
+.contact-main {
+  padding-top: 5.5rem;          /* clear the fixed nav */
+  padding-bottom: 5rem;
+  min-height: calc(100vh - 5.5rem);
+}
+.contact-inner {
+  max-width: min(900px, 92vw);
+  margin: 0 auto;
+  padding: clamp(2.5rem, 7vw, 5rem) clamp(1rem, 4vw, 2rem) 0;
+  text-align: center;
+}
+
+/* heading + tight mirror reflection (matches the project pages) */
+.c-head-wrap { margin-bottom: 1.3rem; }
+.c-heading,
+.c-reflect {
+  font-weight: 800;
+  font-size: clamp(2rem, 6vw, 3.6rem);
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+.c-reflect {
+  margin-top: 0.06em;
+  transform: scaleY(-1);
+  filter: blur(2px);
+  opacity: 0.16;
+  pointer-events: none;
+  user-select: none;
+  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.5), transparent 70%);
+          mask-image: linear-gradient(to top, rgba(0,0,0,0.5), transparent 70%);
+}
+
+.c-tagline {
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-size: clamp(1rem, 2.4vw, 1.5rem);
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 620px;
+  margin: 0 auto 0.9rem;
+}
+.c-name {
+  font-size: clamp(0.8rem, 1.5vw, 1rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+  margin-bottom: clamp(2.5rem, 6vw, 4rem);
+}
+
+/* contact cards */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(0.9rem, 2.4vw, 1.4rem);
+  text-align: left;
+}
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  padding: clamp(1.1rem, 2.5vw, 1.5rem) clamp(1.2rem, 3vw, 1.8rem);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  text-decoration: none;
+  color: inherit;
+  opacity: 0;
+  animation: rise 0.7s ease-out var(--d, 0s) both;
+  transition: transform 0.25s ease, box-shadow 0.25s ease,
+              background 0.25s ease, border-color 0.25s ease;
+}
+.contact-card:hover,
+.contact-card:focus-visible {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.32);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+}
+.contact-card.wide { grid-column: 1 / -1; }
+
+.c-icon {
+  flex: 0 0 auto;
+  width: 26px;
+  height: 26px;
+  stroke: #fff;
+  stroke-width: 1.7;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.c-text {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.c-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+.c-value {
+  font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+  font-weight: 600;
+  word-break: break-word;
+}
+
+@media (max-width: 620px) {
+  .contact-grid { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .contact-card { animation: none; opacity: 1; }
+}

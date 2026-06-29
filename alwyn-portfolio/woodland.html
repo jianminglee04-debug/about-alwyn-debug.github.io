@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alwyn — Woodland Rascal</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles/style.css" />
+  <link rel="stylesheet" href="styles/content.css" />
+</head>
+<body>
+
+  <!-- ============ NAV ============ -->
+  <header class="navbar">
+    <nav class="nav">
+      <a href="index.html" class="nav-link">What's Up</a>
+      <a href="aboutme.html" class="nav-link">About Me</a>
+      <a href="content.html" class="nav-link active">Content</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <main class="content-main">
+
+    <div class="showcase-bar">
+      <a class="hamburger" href="content.html" aria-label="Back to showcase">
+        <span></span><span></span><span></span>
+      </a>
+      <h1 class="showcase-title">SHOWCASE</h1>
+    </div>
+
+    <section class="detail show">
+      <div class="detail-inner">
+
+        <!-- hero -->
+        <div class="heading-wrap reveal" style="--rd:0s">
+          <h2 class="detail-heading">2D ANIMATION</h2>
+          <div class="heading-reflect" aria-hidden="true">2D ANIMATION</div>
+        </div>
+
+        <div class="video16 reveal" style="--rd:0.16s">
+          <video src="image/w0.mp4" controls playsinline preload="metadata"></video>
+        </div>
+
+        <div class="dm-block reveal" style="--rd:0.28s">
+          <h3 class="dm-dasher">WOODLAND RASCAL</h3>
+          <div class="line"></div>
+          <p class="platforms tagline">INTELLECTUALLY DISCOMBOBULATED</p>
+          <div class="line"></div>
+        </div>
+
+        <!-- all characters (names are inside the image) -->
+        <img class="group-shot sr" src="image/w1.png" alt="Woodland Rascal characters"
+             onerror="this.style.display='none'">
+
+        <!-- ===== CHARACTER DESIGN ===== -->
+        <div class="heading-wrap mid sr">
+          <h2 class="detail-heading">CHARACTER DESIGN</h2>
+          <div class="heading-reflect" aria-hidden="true">CHARACTER DESIGN</div>
+        </div>
+
+        <!-- turnaround -->
+        <h3 class="section-label sr">Turnaround</h3>
+        <img class="group-shot sr" src="image/w2.png" alt="Character turnaround"
+             onerror="this.style.display='none'">
+
+        <!-- key poses -->
+        <h3 class="section-label sr">Key Poses</h3>
+        <div class="pose-grid">
+          <img class="sr" src="image/w3.png" alt="Key pose" onerror="this.style.display='none'">
+        
+        </div>
+
+        <!-- character description: art (left) + text (right) -->
+        <div class="char-desc sr">
+          <div class="char-desc-img">
+            <img src="image/w7.png" alt="Pyra character" onerror="this.style.display='none'">
+          </div>
+          <div class="char-desc-text">
+            <div class="cd-item feat-cream">
+              <h4>Appearance :</h4>
+              <p>Flaming pine cone with anger face</p>
+            </div>
+            <div class="cd-item feat-red">
+              <h4>Personality :</h4>
+              <p>Always in anger mode</p>
+            </div>
+            <div class="cd-item feat-orange">
+              <h4>Behavior tendencies :</h4>
+              <p>Irritable and stupid funny</p>
+            </div>
+            <div class="cd-item feat-amber">
+              <h4>Interest :</h4>
+              <p>Like to burn friend</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== STORYBOARD ===== -->
+        <h3 class="section-label sr">Storyboard</h3>
+        <img class="group-shot sr" src="image/w8.png" alt="Storyboard"
+             onerror="this.style.display='none'">
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- reveal sections as they scroll into view -->
+  <script>
+    const srEls = document.querySelectorAll('.sr');
+    const io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    srEls.forEach(function (el) { io.observe(el); });
+  </script>
+
+</body>
+</html>

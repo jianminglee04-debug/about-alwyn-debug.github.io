@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alwyn — Creative Chronicle</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+
+    <!-- =========================================================
+         INTRO SPLASH SCREEN
+         ========================================================= -->
+    <div id="intro" class="intro">
+
+        <div class="hero-inner">
+
+            <h1 class="wordmark">ALWYN</h1>
+
+            <span class="rule rule-top"></span>
+
+            <p class="subtitle">Creative Chronicle</p>
+
+            <span class="rule rule-bottom"></span>
+
+        </div>
+
+        <div class="intro-skip">
+            Click Anywhere To Skip
+        </div>
+
+    </div>
+
+    <!-- =========================================================
+         MAIN WEBSITE
+         ========================================================= -->
+    <header class="navbar">
+        <nav class="nav">
+            <a href="index.html" class="nav-link active">What's Up</a>
+            <a href="aboutme.html" class="nav-link">About Me</a>
+            <a href="content.html" class="nav-link">Content</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Clicking anywhere on the hero continues to About Me
+         (the nav bar above is separate, so its links still work) -->
+    <main class="hero"
+          onclick="window.location.href='aboutme.html'"
+          style="cursor: pointer;">
+
+        <div class="hero-inner">
+
+            <h1 class="wordmark">ALWYN</h1>
+
+            <span class="rule"></span>
+
+            <p class="subtitle">Creative Chronicle</p>
+
+            <span class="rule"></span>
+
+        </div>
+
+        <!-- Click to Continue — same position & style as "Click Anywhere To Skip" -->
+        <a href="aboutme.html"
+           style="position: absolute;
+                  bottom: 2.2rem;
+                  left: 50%;
+                  transform: translateX(-50%);
+                  color: rgba(255, 255, 255, 0.4);
+                  font-size: 0.8rem;
+                  letter-spacing: 0.2em;
+                  text-transform: uppercase;
+                  text-decoration: none;">
+            Click To Continue
+        </a>
+
+    </main>
+
+    <!-- =========================================================
+         INTRO SCRIPT
+         ========================================================= -->
+    <script>
+
+        const intro = document.getElementById("intro");
+
+        if (intro) {
+
+            const INTRO_DURATION = 4700;
+
+            function hideIntro() {
+
+                if (intro.classList.contains("hidden")) return;
+
+                intro.classList.add("hidden");
+
+                intro.addEventListener(
+                    "transitionend",
+                    () => {
+                        intro.style.display = "none";
+                    },
+                    { once: true }
+                );
+            }
+
+            const timer = setTimeout(
+                hideIntro,
+                INTRO_DURATION
+            );
+
+            intro.addEventListener("click", () => {
+
+                clearTimeout(timer);
+
+                hideIntro();
+
+            });
+        }
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alwyn — Planner Hub</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles/style.css" />
+  <link rel="stylesheet" href="styles/content.css" />
+</head>
+<body>
+
+  <!-- ============ NAV ============ -->
+  <header class="navbar">
+    <nav class="nav">
+      <a href="index.html" class="nav-link">What's Up</a>
+      <a href="aboutme.html" class="nav-link">About Me</a>
+      <a href="content.html" class="nav-link active">Content</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <main class="content-main">
+
+    <div class="showcase-bar">
+      <a class="hamburger" href="content.html" aria-label="Back to showcase">
+        <span></span><span></span><span></span>
+      </a>
+      <h1 class="showcase-title">SHOWCASE</h1>
+    </div>
+
+    <!-- ---------- PLANNER HUB detail ---------- -->
+    <section class="detail show">
+      <div class="detail-inner">
+
+        <!-- hero -->
+        <div class="heading-wrap reveal" style="--rd:0s">
+          <h2 class="detail-heading">WEB PROGRAMMING</h2>
+          <div class="heading-reflect" aria-hidden="true">WEB PROGRAMMING</div>
+        </div>
+
+        <p class="detail-sub reveal" style="--rd:0.12s">
+          All you can do in one
+        </p>
+
+        <div class="logo-card reveal" style="--rd:0.24s">
+          <img src="image/plogo.png" alt="Planner Hub"
+               onerror="this.parentElement.style.display='none'">
+        </div>
+
+        <div class="dm-block reveal" style="--rd:0.36s">
+          <h3 class="dm-dasher">PLANNERHUB</h3>
+          <div class="line"></div>
+          <p class="platforms">EVENT&nbsp;&nbsp;DIRECTORY</p>
+          <div class="line"></div>
+        </div>
+
+        <!-- laptop hero shot -->
+        <img class="laptop sr" src="image/p1.png" alt="Planner Hub homepage on a laptop"
+             onerror="this.style.display='none'">
+
+        <!-- five feature blurbs -->
+        <div class="feat-list">
+          <div class="feat feat-amber sr">
+            <h4>Event Directory Platform</h4>
+            <p>Provides a structured list of concerts and entertainment events for users to browse easily.</p>
+          </div>
+          <div class="feat feat-cream sr">
+            <h4>Event Highlight Videos</h4>
+            <p>Homepage displays past concert highlights to attract user interest.</p>
+          </div>
+          <div class="feat feat-sky sr">
+            <h4>Latest entertainment news</h4>
+            <p>Shows updates about upcoming events and celebrity appearances.</p>
+          </div>
+          <div class="feat feat-royal sr">
+            <h4>Focused event category</h4>
+            <p>Website mainly focuses on concerts and entertainment-related events.</p>
+          </div>
+          <div class="feat feat-red sr">
+            <h4>Simple modern interface</h4>
+            <p>Clean layout makes it easy for users to explore event information.</p>
+          </div>
+        </div>
+
+        <!-- style tiles -->
+        <h3 class="section-label sr">Style Tiles</h3>
+        <img class="shot sr" src="image/styletiles.png" alt="Planner Hub style tiles and design system"
+             onerror="this.style.display='none'">
+
+        <!-- full page gallery (2 columns) -->
+        <div class="page-gallery">
+          <div class="page-col">
+            <div class="page-item sr">
+              <p class="page-label">Homepage</p>
+              <img class="page-shot" src="image/p2.png" alt="Homepage" onerror="this.closest('.page-item').style.display='none'">
+            </div>
+            <div class="page-item sr">
+              <p class="page-label">Planner Upload Feature</p>
+              <img class="page-shot" src="image/p3.png" alt="Planner Upload Feature" onerror="this.closest('.page-item').style.display='none'">
+            </div>
+            <div class="page-item sr">
+              <p class="page-label">Planner Edit Project</p>
+              <img class="page-shot" src="image/p4.png" alt="Planner Edit Project" onerror="this.closest('.page-item').style.display='none'">
+            </div>
+          </div>
+
+          <div class="page-col">
+            <div class="page-item sr">
+              <p class="page-label">Search Page</p>
+              <img class="page-shot" src="image/p5.png" alt="Search Page" onerror="this.closest('.page-item').style.display='none'">
+            </div>
+            <div class="page-item sr">
+              <p class="page-label">Planner Highlight</p>
+              <img class="page-shot" src="image/p6.png" alt="Planner Highlight" onerror="this.closest('.page-item').style.display='none'">
+            </div>
+            <div class="page-item sr">
+              <p class="page-label">Planner Details</p>
+              <img class="page-shot" src="image/p7.png" alt="Planner Details" onerror="this.closest('.page-item').style.display='none'">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- reveal sections as they scroll into view -->
+  <script>
+    const srEls = document.querySelectorAll('.sr');
+    const io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+    srEls.forEach(function (el) { io.observe(el); });
+  </script>
+
+</body>
+</html>
