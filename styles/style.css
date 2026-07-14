@@ -961,7 +961,7 @@ body { overflow-x: hidden; }
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   column-gap: clamp(4.7rem, 14vw, 5.3rem);
-  row-gap: clamp(1.8rem, 20vw, 25.6rem);
+  row-gap: clamp(1.8rem, 10vw, 5.6rem);
   margin: clamp(7rem, 10vw, 2.6rem) 0 0;
 }
 .video-grid.single { display: flex; justify-content: center; }
@@ -1190,6 +1190,7 @@ body { overflow-x: hidden; }
   .video-grid {
     grid-template-columns: repeat(1, 1fr);
     column-gap: clamp(1rem, 30vw, 20rem);
+   row-gap: clamp(1.8rem, 20vw, 20.6rem);
   }
   .video-grid.single .vid { width: clamp(150px, 70%, 240px); }
   .brand-text { font-size: clamp(3rem, 16vw, 6rem); }
