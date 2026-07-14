@@ -1188,10 +1188,10 @@ body { overflow-x: hidden; }
    ============================================================ */
 @media (max-width: 620px) {
   .video-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     column-gap: clamp(1rem, 5vw, 2rem);
   }
-  .video-grid.single .vid { width: clamp(150px, 46%, 240px); }
+  .video-grid.single .vid { width: clamp(150px, 70%, 240px); }
   .brand-text { font-size: clamp(3rem, 16vw, 6rem); }
   .me-title  { font-size: clamp(1.8rem, 9vw, 3rem); }
 
